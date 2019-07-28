@@ -86,6 +86,18 @@ defmodule Hedwig.Adapters.Slack do
     {:noreply, state}
   end
 
+  def handle_call(:users, _from, state) do
+    {:reply, state.users, state}
+  end
+
+  def handle_call(:channels, _from, state) do
+    {:reply, state.channels, state}
+  end
+
+  def handle_call(:groups, _from, state) do
+    {:reply, state.groups, state}
+  end
+
   def handle_info({:channels, channels}, state) do
     {:noreply, %{state | channels: reduce(channels, state.channels)}}
   end
